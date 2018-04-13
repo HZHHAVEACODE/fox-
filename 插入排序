@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+void QSORT(int *data)
+{
+	int key,i,j;
+	for(i=1;i<6;i++)
+	{
+		key=data[i];
+		j=i-1;
+		while(j>=0&&data[j]>key)
+		{
+			data[j+1]=data[j--];
+			data[j+1]=key;
+		}
+	}
+	for(i=0;i<6;i++)
+	{
+		printf("%d ",data[i]);
+	}
+}
+void main()
+{
+	int a[]={5,2,4,6,1,3};
+	QSORT(a);
+	return 0;
+
+}
