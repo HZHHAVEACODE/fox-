@@ -48,7 +48,7 @@ int main()
 
     while(i--)
     {
-        a[i]=rand()%99999+1;
+        a[i]=rand()%9999+1;
     }start = clock();
 
     MERGE_SORT(a,0,100000-1);
