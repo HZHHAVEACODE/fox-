@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<time.h>
+void MERGE(int *A,int p,int q,int r)
+{
+   int n1=q-p;
+   int n2=r-q;
+   int R[n1],L[n2+1];
+   int i,j,n=0,k=0;
+   for(i=0;i<n1;i++)
+   {
+       R[i]=A[p+i];
+   }
+   for(j=0;j<=n2;j++)
+   {
+       L[j]=A[q+j];
+   }
+   R[n1]=1000000;
+   L[n2+1]=2000000;
+   i=j=0;
+   for(k=p;k<=r;k++)
+   {
+       if(L[i]<=R[j])
+       {
+           A[k]=L[i++];
+       }else
+       {
+           A[k]=R[j++];
+       }
+   }
+}
+void MERGE_SORT(int *A,int q,int r)
+{
+    int p;
+    if(q<r)
+    {
+        p=(q+r)/2;
+        MERGE_SORT(A,q,p);
+        MERGE_SORT(A,p+1,r);
+        MERGE(A,q,p+1,r);
+    }
+}
+int main()
+{
+    clock_t start, finish;
+    int a[100000];
+    int i=100000;
+    srand((unsigned)time( NULL ));
+
+    while(i--)
+    {
+        a[i]=rand()%99999+1;
+    }start = clock();
+
+    MERGE_SORT(a,0,100000-1);
+    finish = clock();
+    for(i=0;i<100000;i++)
+        printf("%d ",a[i]);
+    printf("\n");
+    printf("%llf",(double)(finish - start) / CLOCKS_PER_SEC);
+    return 0;
+}
